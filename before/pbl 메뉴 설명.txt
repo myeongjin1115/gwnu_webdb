@@ -1,0 +1,18 @@
+changeLP = 수업계획서 수정
+checkLP = 수업계획서 조회
+deleteLP = 수업계획서 삭제
+Lecture_input_data = registerLP와 연동하여 수업계획서 db에 삽입
+LecturePlan(P) = 교수 입장에서의 수업계획서 등록메뉴
+LecturePlan(S) = 학생 입장에서의 수업계획서 등록메뉴
+registerLP = 수업계획서 등록
+timetable = 시간표
+
+
+
+교수 입장에서의 출입 가능 메뉴
+시간표 조회
+수업계획서 등록
+
+학생 입장에서의 출입 가능 메뉴
+시간표 조회
+수업계획서 조회

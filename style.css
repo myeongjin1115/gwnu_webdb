@@ -1,0 +1,102 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+body {
+	width: 1200px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+#header {
+	margin: 5px 0;
+	width: 1200px;
+	height: 60px;
+}
+
+#title {
+	height: 60px;
+	width: 600px;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: #EA5A8D;
+}
+
+#log {
+	height: 60px;
+	width: 400px;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: #FFD735;
+}
+
+#logsubmit {
+	display: table-cell;
+	vertical-align: middle;
+	height: 60px;
+	width: 200px;
+	background-color: #5ACCFF;
+}
+
+#nav {
+	width: 200px;
+	height: 600px;
+	display: inline;
+	float: left;
+	text-align: center;
+	background-color: #d2d2d2;
+}
+
+#nav_header {
+	display: table-cell;
+	align-items: center;
+	text-align: center;
+	vertical-align: middle;
+	width: 200px;
+	height: 100px;
+}
+
+#article {
+	display: inline-block;
+	width: 1000px;
+}
+
+#nav_list {
+	display: block;
+	float: left;
+	padding: 10px;
+	text-align: left;
+	width: 180px;
+}
+
+#article_head {
+	display: inline-flex;
+	align-items: center;
+	width: 995px;
+	height: 60px;
+	margin-left: 5px;
+	text-align: center;
+	background-color: #DEDEDE;
+}
+
+#article_subhead {
+	display: inline-flex;
+	align-items: center;
+	width: 995px;
+	height: 60px;
+	margin: 5px 0 0 5px;
+	text-align: center;
+	background-color: #EFEFEF;
+}
+
+#article_main {
+	display: inline-block;
+	width: 995px;
+	height: 470px;
+	margin: 5px 0 0 5px;
+	background-color: #EFEFEF;
+}

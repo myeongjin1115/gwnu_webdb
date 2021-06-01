@@ -1,0 +1,51 @@
+<?
+	session_start();
+	$name = $_SESSION['userid'];
+	global $con;
+	global $table;
+    global $errormsg;
+?>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <!-- header -->
+    <div id="header">
+        <?php include "header.php";?>
+    </div>
+
+    <!-- navigator -->
+    <div id="nav">
+        <?php include "nav.php";?>
+    </div>
+
+    <!-- article -->
+    <!-- article header -->
+    <div id="article_head">
+        <font size="5">수업관리</font>
+    </div>
+
+    <!-- article subheader -->
+    <div id="article_subhead">
+        <font size="5">시간표 조회</font>
+        <table align="right">
+            <tr>
+                <td>
+                    <form action="timetable.php" method="post">
+                        <input type="submit" name="" value="조회">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- article main -->
+    <div id="article_main">
+
+    </div>
+</body>
+
+</html>

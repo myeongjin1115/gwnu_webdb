@@ -1,0 +1,13 @@
+<?php
+    session_start();
+
+    echo('
+    <script>
+        alert("·Î±×¾Æ¿ôÇÏ¼Ì½À´Ï´Ù.");
+        window.location = "main.html";
+    </script>
+    ');
+    
+    session_unset();
+    session_destroy();
+?>

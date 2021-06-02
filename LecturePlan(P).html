@@ -1,0 +1,65 @@
+<?
+	session_start();
+	$ID = $_SESSION['userid'];
+	if($ID == '학생')
+		print "<html><head><META http-equiv='refresh' content='0 url=./LecturePlan(S).html'></head></head>";
+	global $con;
+	global $table;
+	global $errormsg;
+?>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <!-- header -->
+    <div id="header">
+        <?php include "header.php";?>
+    </div>
+
+    <!-- navigator -->
+    <div id="nav">
+        <?php include "nav.php";?>
+    </div>
+
+    <!-- article -->
+    <!-- article header -->
+    <div id="article_head">
+        <font size="5">수업관리</font>
+    </div>
+
+    <!-- article subheader -->
+    <div id="article_subhead">
+        <font size="5">수업계획서 등록</font>
+        <table align="right">
+            <tr>
+                <td>
+                    <form action="LecturePlan(P).php" method="post">
+                        <input type="submit" name="" value="조회">
+                    </form>
+                </td>
+	    <td>
+                    <form action="registerLP.php" method="post">
+                        <input type="submit" name="" value="생성">
+                    </form>
+	    </td>
+	    <td>
+                    <input type="submit" name="" value="수정">
+                </td>
+	    <td>
+                    <input type="submit" name="" value="삭제">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- article main -->
+    <div id="article_main">
+
+    </div>
+</body>
+
+</html>

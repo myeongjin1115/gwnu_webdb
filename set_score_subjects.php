@@ -53,7 +53,7 @@
                 for($i = 0 ; $i < $subject_count; $i++){
                     echo "$subject[$i]"."&nbsp;&nbsp;&nbsp;"."$subject_code[$i]"."&nbsp;&nbsp;&nbsp;&nbsp;";
                     echo "<input type = 'radio' name = 'subject' value ='$subject[$i]'>";
-                    echo "<br>";                            
+                    echo "<br>";                   
                 }
 	        ?>
             </center>			 

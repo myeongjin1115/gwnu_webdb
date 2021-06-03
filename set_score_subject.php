@@ -6,9 +6,15 @@
     //$subject = 'WebDB';
     $num = $_POST["aa"];
     echo $num;
-    $con = mysql_connect('localhost', 'qwerty', '1234') or die("MYSQL 서버 연결 Error");
+    $con = mysql_connect('localhost', 'qwerty', '1234') or die("MYSQL ?? 楷搬 Error");
     mysql_select_db('webdb', $con);
-    $query = "select stu.SNAME, stu.Grade, stu.SID from Lecture lec, Student stu, Class c where lec.PID = '$id' and c.LID= lec.LID and stu.SID = c.SID and '$subject' = Lec.LNAME" ;
+    $query = "select student.SNAME, student.Grade, student.SID 
+	from lecture,student,class
+	where lecture.PID = '$id' and class.LID= lecture.LID and 
+	student.SID = class.SID and '$subject' = lecture.LID" ;
+	
+	
+
     $result = mysql_query($query, $con);
     $z = 0;
 	while($row=mysql_fetch_array($result)) {
@@ -26,8 +32,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
-<body>
-    <!-- header -->
+<body>   <!-- header -->
     <div id="header">
         <?php include "header.php";?>
     </div>
@@ -40,22 +45,23 @@
     <!-- article -->
     <!-- article header -->
     <div id="article_head">
-        <font size="5">성적관리</font>
+        <font size="5">과목선택</font>
     </div>
 
     <!-- article subheader -->
     <div id="article_subhead">
-        <font size="5">성적부여</font>
+        <font size="5">과목선택</font>
     </div>
 
     <!-- article main -->
     <div id="article_main">
         <form action="set_score_subject_func.php" method="post">
-            <p style = "text-align:right;"><input type="submit" value="성적부여"></p>
+            <p style = "text-align:right;"><input type="submit" value="과목선택"></p>
             <center>
             <?php 
+				;
                 for($i = 0 ; $i < $z; $i++){
-                    echo("$name[$i]"."&nbsp;&nbsp;"."$grade[$i]학년"."&nbsp;&nbsp;"."$SID[$i]"."&nbsp;&nbsp;&nbsp;&nbsp;");
+                    echo("$name[$i]"."&nbsp;&nbsp;"."$grade[$i]"."&nbsp;&nbsp;"."$SID[$i]"."&nbsp;&nbsp;&nbsp;&nbsp;");
 
                     echo("<SELECT name='score$i' size=1>
                         <option value='6'>A+</option>

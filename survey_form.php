@@ -1,6 +1,30 @@
 <?
 	session_start();
-
+	$today = date("Y-m-d");
+	$con=mysql_connect("localhost", "qwerty", "1234");
+	mysql_select_db("webdb", $con);
+	$query = "select EndDay from term where StartDay < '$today' and '$today' < EndDay";
+	$result1 = mysql_query($query, $con);
+	if((!mysql_num_rows($result1))){
+		echo('
+		<script>
+		 alert("학기중이 아닙니다.") ;
+		 self.close();
+		 </script>
+		');
+	}
+	$row=mysql_fetch_array($result1);
+	$EndDay1 = strtotime($row[0].'-10 days');
+	$EndDay2 = strtotime($row[0]);
+	$todayunix = strtotime(date("Y-m-d"));
+	if(!($todayunix<$EndDay2&&$todayunix>$EndDay1)){
+		echo('
+        <script>
+            alert("설문조사는 종강 10일전 부터 가능합니다.")
+            self.close();
+        </script>
+        ');
+	}	
     if(!$_POST["choice"]) {
         echo('
         <script>

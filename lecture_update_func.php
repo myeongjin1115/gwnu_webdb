@@ -14,7 +14,7 @@
 	}
     $query="update $table set LID='$LID',LNAME='$_POST[LNAME]',Classification='$_POST[Classification]',Personnel='$_POST[Personnel]',
     DayOfWeek='$_POST[DayOfWeek]',StartTime='$S',EndTime='$E',Credit='$_POST[Credit]',Room='$_POST[Room]',
-    LPID='$_POST[LPID]',PID='$_SESSION[userPID]'
+    PID='$_SESSION[userPID]'
     where LID='$_POST[LID]'";
     $result=mysql_query($query, $con);
 ?>

@@ -44,7 +44,7 @@
 
     <!-- article subheader -->
     <div id="article_subhead">
-        <font size="5">강의계획서 등록</font>
+        <font size="5">강의계획서</font>
         <table align="right">
             <tr>
                 <td>
@@ -86,9 +86,9 @@
 			else
 				echo "<td height=30 width=20>교양</td>";
 			if($Lecture[3])
-				echo "<td height=30 width=150><INPUT type=submit formaction=checkLP.php value=O style=background-color:transparent;  border:0px transparent solid;></td>";
+				echo "<td height=30 width=150>O</td>";
 			else
-				echo "<td height=30 width=150><INPUT type=submit formaction=registerLP.php value=X style=background-color:transparent;  border:0px transparent solid;></td>";
+				echo "<td height=30 width=150>X</td>";
 			echo "<td height=30 width=150><INPUT type=radio name=select value=$Lecture[0]></td>";
 		echo "</tr>";
 	}

@@ -1,8 +1,18 @@
 <?
 	session_start();
+	$today = date("Y-m-d");
 	$con=mysql_connect("localhost", "qwerty", "1234");
 	mysql_select_db("webdb", $con);
-		
+	$query = "select TID from term where StartDay > '$today' and '$today' >= RegDay";
+	$result1 = mysql_query($query, $con);
+	if((!mysql_num_rows($result1))){
+		echo('
+		<script>
+		 alert("복학기간이 아닙니다.") ;
+		 window.location.replace("go_back.html");
+		 </script>
+		');
+	}
 		#학생이라면 student 테이블을 가져와 비교한후 재학중이라면 메세지만 아니면 재학으로 변경
 	if($_SESSION["userid"] === "학생"){
 		$table="student";
@@ -18,7 +28,8 @@
 			</script>
             ');
 		}
-
+		
+		
 		$query="update $table set Attend=1 where SID='$_SESSION[userSID]'";
 		$result=mysql_query($query, $con);
 		echo('

@@ -1,6 +1,9 @@
 <?
 	session_start();
-
+	$today = date("Y-m-d");
+	$con=mysql_connect("localhost", "qwerty", "1234");
+	mysql_select_db("webdb", $con);
+	$update_delete=$_POST["update_delete"];
 	if(!$_POST["choice"]){
 		echo('
         <script>
@@ -9,41 +12,57 @@
         </script>
         ');
 	}
+	$query = "select TID from term where StartDay > '$today' and '$today' >= RegDay";
+	$result = mysql_query($query, $con);
+	if((!mysql_num_rows($result))&&($update_delete==='삭제')){
+		echo('
+		<script>
+			alert("강의 삭제 날짜가 아닙니다!");
+			self.close();
+		</script>
+		');
+	}else if(!mysql_num_rows($result)){
+		echo('
+		<script>
+			alert("강의 변경 날짜가 아닙니다!");
+			self.close();
+		</script>
+		');
+	}else{
+	
+		
+		$table="Lecture";
+		$query="select * from $table where LID='$_POST[choice]'";
+		$result=mysql_query($query, $con);
+		$row=mysql_fetch_array($result);
 
-	$con=mysql_connect("localhost", "qwerty", "1234");
-		mysql_select_db("webdb", $con);
+		$LID=$row[0];
+		$LNAME=$row[1];
+		$Class=$row[2];
+		$Person= $row[3];
+		$PID=$row[4];
+		$Day=$row[5];
+		$start=$row[6];
+		$End=$row[7];
+		$credit=$row[8];
+		$room=$row[9];
+		$LPID=$row[10];
 
-    $table="Lecture";
-    $query="select * from $table where LID='$_POST[choice]'";
-    $result=mysql_query($query, $con);
-    $row=mysql_fetch_array($result);
+		if($update_delete === "삭제"){
+			$con=mysql_connect('localhost', 'qwerty', '1234');
+			mysql_select_db('webdb', $con);
+			$table="Lecture";
+			$query="delete from $table  where LID='$LID'";
+			$result=mysql_query($query, $con);
 
-	$LID=$row[0];
-	$LNAME=$row[1];
-	$Class=$row[2];
-	$Person= $row[3];
-	$PID=$row[4];
-	$Day=$row[5];
-	$start=$row[6];
-	$End=$row[7];
-	$credit=$row[8];
-	$room=$row[9];
-	$LPID=$row[10];
-
-	if($_POST["update_delete"] === "삭제"){
-        $con=mysql_connect('localhost', 'qwerty', '1234');
-		mysql_select_db('webdb', $con);
-        $table="Lecture";
-        $query="delete from $table  where LID='$LID'";
-        $result=mysql_query($query, $con);
-
-        echo('
-        <script>
-            opener.parent.location.reload();
-            self.close();
-        </script>
-        ');
-    }
+			echo('
+			<script>
+				opener.parent.location.reload();
+				self.close();
+			</script>
+			');
+		}
+	}
 ?>
 
 <html>
@@ -120,7 +139,6 @@
             </select><br>
             취득학점<input type = 'text' name ='Credit'  value="<? echo $credit ?>" size='2'>&nbsp;&nbsp;&nbsp;
             강의실<input type = 'text' name ='Room' value="<? echo $room ?>" size='5'>&nbsp;&nbsp;&nbsp;
-            강의계획서<input type = 'text' name ='LPID'  value="<? echo $Person ?>" size='30'>&nbsp;&nbsp;&nbsp;
             <input type="submit" value="수정">
             </center>
         </div>

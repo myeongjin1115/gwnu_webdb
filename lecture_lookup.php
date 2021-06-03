@@ -1,9 +1,15 @@
 <?
     session_start();
-
+	$today = date("Y-m-d");
     $con=mysql_connect("localhost", "qwerty", "1234");
     mysql_select_db("webdb", $con);
-
+	$query="select TID from term where StartDay<'$today' and EndDay>'$today'";
+	$result1=mysql_query($query, $con);
+	if(!mysql_num_rows($result1)){
+		$query="select TID from term where StartDay=(select min(StartDay) from term where '$today' <= StartDay)";
+		$result1=mysql_query($query, $con);
+	}
+	$rows = mysql_fetch_array($result1);
     echo('
     <html>
 
@@ -58,7 +64,7 @@
         </div>
     ');
     $table="Lecture";
-    $query="select LNAME,LID,LPID from $table where PID='$_SESSION[userPID]'";
+    $query="select LNAME,RegisterLecture.LID,LPID from $table,RegisterLecture where PID='$_SESSION[userPID]' and TID='$rows[0]' and  RegisterLecture.LID =Lecture.LID";
     $result=mysql_query($query, $con);
     
     if(!mysql_num_rows($result)){

@@ -25,8 +25,9 @@
     for($a = 0; $a < $i ; $a++){	
 		$SID[$a] = $_POST["SID$a"];
 		$score[$a] = $_POST["score$a"];
-		$query = "update Class set Score = $score[$a] where LID = (select LID from Lecture where LNAME = '$subject') and SID = '$SID[$a]' ";
+		$query = "update Class set Score = '$score[$a]' where LID = (select LID from Lecture where LID = '$subject') and SID = '$SID[$a]' ";
 		$result = mysql_query($query, $con);
+	
     }
 //테스트를 통해서 쿼리문과 결과는 바뀌는것을 확인하였습니다.
 	

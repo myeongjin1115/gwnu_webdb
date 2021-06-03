@@ -10,7 +10,6 @@ function update_data($LPID, $LID, $TextBook, $HowToScore, $Goal, $Plan1, $Plan2,
 
 	$result = mysql_query($query, $connect);
 	mysql_close($connect);
-    echo($TextBook.''.$HowToScore.''.$Goal);
 ?>
 
 <html>

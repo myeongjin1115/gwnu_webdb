@@ -1,4 +1,20 @@
 <?php
+	session_start();
+	$today = date("Y-m-d");
+	$con=mysql_connect("localhost", "qwerty", "1234");
+	mysql_select_db("webdb", $con);
+	$query = "select TID from term where StartDay < '$today' and '$today' < EndDay";
+	$result1 = mysql_query($query, $con);
+	if((!mysql_num_rows($result1))){
+		echo('
+		<script>
+		 alert("학기중이 아닙니다.") ;
+		 window.location.href="/main.html";
+		 </script>
+		');
+	}
+	$row = mysql_fetch_array($result1);
+	$TID = $row[0];
     if(!isset($_SESSION["userid"])) {
         echo('
         <script>
@@ -16,10 +32,8 @@
         ');
     }
     else if($_SESSION["userid"] === "학생") {
-        $con=mysql_connect("localhost", "qwerty", "1234");
-		mysql_select_db("webdb", $con);
-        $query="select distinct PNAME,class.LID,LNAME from class,Lecture,professor  
-        where class.LID=lecture.LID and class.SID='$_SESSION[userSID]' and Lecture.PID=professor.PID";
+        $query="select distinct PNAME,class.LID,LNAME from class,Lecture,professor,RegisterLecture 
+		where class.LID=RegisterLecture.LID and class.SID='$_SESSION[userSID]' and Lecture.PID=professor.PID and '$TID'=RegisterLecture.TID and class.LID=lecture.LID;";
         
         $result=mysql_query($query, $con);
 

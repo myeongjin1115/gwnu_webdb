@@ -1,11 +1,18 @@
 <?
 	session_start();
 
-	$database = "webdb";
-	$table = "Lecture";
-	$table_s = "Class";
+	$today = date("Y-m-d");
+
 	$connect = mysql_connect('localhost', 'qwerty', '1234')or die("mySQL 서버 연결 Error!");
-	mysql_select_db($database, $connect);
+	mysql_select_db("webdb", $connect);
+	$query = "select TID from term where StartDay <= '$today' and '$today' <= EndDay";
+	$result = mysql_query($query, $connect);
+	if(!mysql_num_rows($result)) {
+		$query = "select TID from term where StartDay=(select min(StartDay) from term where '$today' <= StartDay)";
+		$result = mysql_query($result);
+	}
+	$array = mysql_fetch_array($result);
+	$TID = $array[0];
 
 	if(!isset($_SESSION["userid"])) {
 		echo('
@@ -15,50 +22,29 @@
         </script>
         ');
 	}
-	else if($_SESSION['userid']=='교수'){		//로그인한 사람이 교수 또는 학생을 구분하여 SQL 쿼리문 작성
+	else if($_SESSION['userid'] === '교수'){		//로그인한 사람이 교수 또는 학생을 구분하여 SQL 쿼리문 작성
 		$ID = $_SESSION['userPID'];
-		$query = "select LNAME, DayOfWeek, StartTime, EndTime from $table where PID='$ID'";
-		$query1 = "select count(*) as cnt from $table where PID='$ID'";
-		$result = mysql_query($query, $connect);
-		$result1 = mysql_query($query1, $connect);
-
-		$schedule = mysql_fetch_array($result);
-		$num=mysql_fetch_array($result1);
+		$query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
+			from Lecture, RegisterLecture 
+			where Lecture.PID='$ID' and Lecture.LID = RegisterLecture.LID and RegisterLecture.TID='$TID'";
 	}
 	else if($_SESSION["userid"] === "학생") {
 		$ID = $_SESSION['userSID'];
-		$query = "select LID from $table_s where SID='$ID'";		//학생 수강 과목 검색
-		$query1 = "select count(*) as cnt from $table_s where SID='$ID'";
-
-		$result = mysql_query($query, $connect);
-		$result1 = mysql_query($query1, $connect);
-
-		$temp = mysql_fetch_array($result);
-		$num=mysql_fetch_array($result1);
-
-		$temp1 = $temp[0];	//LID
-		$query2 = "select LNAME, DayOfWeek, StartTime, EndTime from $table where LID='$temp1'";		//학생 수강 과목에 대해 lecture 테이블에서 과목 정보 검색
-		$result2 = mysql_query($query2, $connect);
-
-		$schedule = mysql_fetch_array($result2);
+		$query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
+			from Lecture, Class, RegisterLecture where Class.SID='$ID' and Class.LID=Lecture.LID
+			and Class.LID=RegisterLecture.LID and RegisterLecture.TID='$TID'";		//학생 수강 과목 검색
 	}
+	$result = mysql_query($query, $connect);
+	$num = mysql_num_rows($result);
 
-	if($_SESSION['userid']=='교수'){		//로그인한 사람이 교수 또는 학생을 구분하여 데이터 배열에 저장
-		for($k=0;$k<$num[0] ;$k++){	
-			for($j=0;$j<4;$j++)
-				$lecture[$k][$j] = $schedule[$j];
-			$schedule = mysql_fetch_array($result);
+	$schedule = mysql_fetch_array($result);
+
+	$lecture;
+	for($i = 0; $i < $num; $i++) {
+		for($j = 0; $j < 4; $j++) {
+			$lecture[$i][$j] = $schedule[$j];
 		}
-	}else {
-		for($k=0;$k<$num[0] ;$k++){
-			for($j=0;$j<4;$j++)
-				$lecture[$k][$j] = $schedule[$j];
-			$temp = mysql_fetch_array($result);
-			$temp1 = $temp[0];	//LID
-			$query2 = "select LNAME, DayOfWeek, StartTime, EndTime from $table where LID='$temp1'";
-			$result2 = mysql_query($query2, $connect);
-			$schedule = mysql_fetch_array($result2);
-		}
+		$schedule = mysql_fetch_array($result);
 	}
 ?>
 <html>
@@ -114,8 +100,8 @@
 				for($i=0; $i<20; $i++){		//각 교시별 한 칸씩 출력하면서 해당되는 수업이 있으면 출력
 					echo "<tr align=center>";
 					echo "<td>".$i."교시</td>";
-					for($j=0; $j<6;$j++){
-						for($k=0;$k<$num[0];$k++){
+					for($j=0; $j<6; $j++){
+						for($k=0; $k<$num; $k++){
 							if($lecture[$k][1]==$j){
 								if($i>=$lecture[$k][2] && $i<=$lecture[$k][3]){
 									echo "<td>".$lecture[$k][0]."</td>";

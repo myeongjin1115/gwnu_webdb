@@ -1,19 +1,25 @@
 <?
 	$database = "webdb";
-	$table = "LecturePlan";
 	$connect = mysql_connect('localhost', 'qwerty', '1234')or die("mySQL 서버 연결 Error!");
 	mysql_select_db($database, $connect);
 
 	$LID=$_POST['select'];
 
-	$query = "select * from $table where LID=$LID";
+	$query = "select * from LecturePlan where LID='$LID'";
 
 	$result = mysql_query($query, $connect);
 
-	$plan = mysql_fetch_array($result);
-
-	$name=$_POST['select'];
-	echo $name;
+	if(!mysql_num_rows($result)) {
+		echo('
+		<script>
+			alert("해당 강의는 계획서가 등록되어있지 않습니다!");
+			window.location.href="./LecturePlan(S).php";
+		</script>
+		');
+	}
+	else {
+		$plan = mysql_fetch_array($result);
+	}
 ?>
 
 <html>

@@ -18,7 +18,7 @@ echo('
 		<li type="none"><a href="./timetable.html">시간표 조회</a></li>
 		<li type="none"><a href="./lecture.html">강의 관리</a></li>
 		<li type="none"><a href="./survey.html">설문조사 진행</a></li>
-		<li type="none"><a href="./LecturePlan.html">수업계획서</a></li>
+		<li type="none"><a href="./LecturePlan(S).html">강의계획서</a></li>
 	</ul>
 </details>
 <details>

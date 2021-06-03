@@ -76,7 +76,6 @@ echo('
             </select><br>
             취득학점<input type="text" name="Credit" size="2">&nbsp;&nbsp;&nbsp;
             강의실<input type="text" name="Room" size="5">&nbsp;&nbsp;&nbsp;
-            강의계획서<input type="text" name="LPID" size="30">&nbsp;&nbsp;&nbsp;
             <input type="submit" onclick=opener.parent.location.reload() name="생성" value="생성">
             </center>
         </div>

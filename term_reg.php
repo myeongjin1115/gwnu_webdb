@@ -50,7 +50,7 @@
             $row = mysql_fetch_array($result);
             $Tuition = $row[1];
             echo('
-                <p>학기 등록금은 '.$Tuition.'입니다.</p>
+                <p>학기 등록금은 '.$Tuition.'원 입니다.</p>
             ');
         }
         echo('

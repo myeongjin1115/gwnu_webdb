@@ -29,8 +29,8 @@
 		</script>
 		');
 	}else{
-	
-		
+		$row=mysql_fetch_array($result);
+		$TID = $row[0];
 		$table="Lecture";
 		$query="select * from $table where LID='$_POST[choice]'";
 		$result=mysql_query($query, $con);
@@ -54,7 +54,8 @@
 			$table="Lecture";
 			$query="delete from $table  where LID='$LID'";
 			$result=mysql_query($query, $con);
-
+			$query="delete from registerlecture  where TID='$TID'";
+			$result=mysql_query($query, $con);
 			echo('
 			<script>
 				opener.parent.location.reload();

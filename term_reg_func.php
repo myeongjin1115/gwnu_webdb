@@ -1,4 +1,4 @@
-<?php
+<?
     session_start();
 
     if($_SESSION["userid"] === "교수") {
@@ -20,7 +20,7 @@
         if(!mysql_num_rows($result)) {
             echo('
             <script>
-                alert("신청 기간이 아닙니다!");
+                alert("신청 기간이 아닙니다");
                 window.location.href="/main.html";
             </script>
             ');
@@ -36,9 +36,9 @@
 
             $row = mysql_fetch_row($result);
             $attend = $row[0];
-            if($attend === '0') {
+            if($attend == '0') {
                 echo('
-                <script>
+                <script type="text/javascript" charset="utf-8">
                     alert("복학을 먼저 신청해주세요!");
                     window.location.href="/go_back.html";
                 </script>
@@ -47,10 +47,11 @@
             else {
                 $query = "select * from registerStudent where SID='$sid' and TID='$termId'";
                 $result = mysql_query($query, $con);
+				
                 if(mysql_num_rows($result)) {
                     echo('
                     <script>
-                        alert("이미 등록된 학생입니다.");
+                        alert("이미 등록된 학생입니다!");
                         window.location.href="/main.html";
                     </script>
                     ');

@@ -67,33 +67,30 @@
     $query="select LNAME,RegisterLecture.LID,LPID from $table,RegisterLecture where PID='$_SESSION[userPID]' and TID='$rows[0]' and  RegisterLecture.LID =Lecture.LID";
     $result=mysql_query($query, $con);
     
-    if(!mysql_num_rows($result)){
-        $errormsg="계정이 없습니다";
-        return 0;
-    }
-    else {
-        echo('
-            <div id="article_main">
-                <table>
-                    <tr>
-                        <td width="500"><center><strong>교과목명</strong></center></td>
-                        <td width="200"><center><strong>과목코드</strong></center></td>
-                        <td><center><strong>수업계획서</strong></center></td>
-                    </tr>
-        ');
-        while($row=mysql_fetch_array($result)){
-            echo('
-                <tr>
-                    <td width="500"><center>'.$row[0].'</center></td>
-                    <td><center>'.$row[1].'</center></td>
-                    <td width="200"><center>'.($row[2]!=""?"O":"X").'<center></td>
-                    <td><input type="radio" name="choice" value="'.$row[1].'"</td>
-                </tr>
-            ');
-        }  
-        echo('
-                </table>
-            </div>
-        ');
-    }
+   
+    
+	echo('
+		<div id="article_main">
+			<table>
+				<tr>
+					<td width="500"><center><strong>교과목명</strong></center></td>
+					<td width="200"><center><strong>과목코드</strong></center></td>
+					<td><center><strong>수업계획서</strong></center></td>
+				</tr>
+	');
+	while($row=mysql_fetch_array($result)){
+		echo('
+			<tr>
+				<td width="500"><center>'.$row[0].'</center></td>
+				<td><center>'.$row[1].'</center></td>
+				<td width="200"><center>'.($row[2]!=""?"O":"X").'<center></td>
+				<td><input type="radio" name="choice" value="'.$row[1].'"</td>
+			</tr>
+		');
+	}  
+	echo('
+			</table>
+		</div>
+	');
+    
 ?>

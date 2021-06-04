@@ -1,6 +1,6 @@
 <?
 	session_start();
-
+	$today = date("Y-m-d");
 	$con=mysql_connect("localhost", "qwerty", "1234");
 	mysql_select_db("webdb", $con);
 
@@ -36,9 +36,12 @@
 		'$_POST[Credit]','$_POST[Room]','$_POST[LPID]'
 		)";		
 		$result=mysql_query($query, $con);
-		
+		$query = "select TID from term where StartDay > '$today' and '$today' >= RegDay";
+		$result=mysql_query($query, $con);
+		$row = mysql_fetch_array($result);
+		$TID = $row[0];
 		$query="insert into RegisterLecture values(
-		'$TID[0]','$LID')";		
+		'$TID','$LID')";		
 		$result=mysql_query($query, $con);
 		echo('
 		<script>

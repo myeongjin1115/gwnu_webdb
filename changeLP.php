@@ -14,7 +14,17 @@
 
 		$result = mysql_query($query, $connect);
 
-		$plan = mysql_fetch_array($result);
+		if(!mysql_num_rows($result)) {
+			echo('
+			<script>
+				alert("해당 강의는 계획서가 등록되어있지 않습니다!");
+				window.location.href="./LecturePlan(S).php";
+			</script>
+			');
+		}
+		else {
+			$plan = mysql_fetch_array($result);
+		}
 
 	} else
 		print "<html><head><META http-equiv='refresh' content='0 url=./LecturePlan(P).php'></head></head>";

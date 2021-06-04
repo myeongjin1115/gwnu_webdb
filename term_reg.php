@@ -1,4 +1,9 @@
 <?php
+    $con = mysql_connect('localhost', 'qwerty', '1234');
+    mysql_select_db('webdb', $con);
+    $query = "select TID, Tuition from term where RegDay <= '$today' and '$today' < StartDay";
+    $result = mysql_query($query, $con);
+
     if(!isset($_SESSION['userid'])) {
         echo('
         <script>
@@ -32,6 +37,23 @@
         <div id="article_main">
             <p>유의사항</p>
             <p>학기 등록을 신청하시겠습니까?</p>
+            <br>
+        ');
+
+        if(!mysql_num_rows($result)) {
+            echo('
+                <p>현재 학기가 진행중이므로 등록금이 출력되지 않습니다.</p>
+                <p>등록금은 학기 신청 기간동안 표기됩니다.</p>
+            ');
+        }
+        else {
+            $row = mysql_fetch_array($result);
+            $Tuition = $row[1];
+            echo('
+                <p>학기 등록금은 '.$Tuition.'입니다.</p>
+            ');
+        }
+        echo('
         </div>
         ');
     }

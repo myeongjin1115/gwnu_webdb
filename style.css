@@ -73,6 +73,59 @@ a {
 	width: 180px;
 }
 
+#main {
+	width: 995px;
+	height: 600px;
+	margin-left: 5px;
+}
+
+#clock {
+	display: inline-block;
+	text-align: center;
+	font: 3em "Fira Sans", sans-serif;
+	width: 395px;
+	height: 295px;
+	overflow: auto;
+	background-color: #EFEFEF;
+}
+
+#clock p {
+	display: inline-block;
+	margin-top: 100px;
+}
+
+#timetable {
+	display: inline-block;
+	width: 594px;
+	height: 295px;
+	overflow: auto;
+	background-color: #EFEFEF;
+}
+
+#timetable table {
+	width: 100%;
+	text-align: center;
+}
+
+#timetable td {
+	width: 20px;
+	height: 20px;
+}
+
+#lecture {
+	width: 995px;
+	height: 302px;
+	background-color: #EFEFEF;
+}
+
+#lecture table {
+	width: 100%;
+}
+
+#lecture tr {
+	height: 30px;
+}
+
 #article_head {
 	display: inline-flex;
 	align-items: center;

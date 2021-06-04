@@ -88,13 +88,13 @@
     <div id="article_main">
 			<table align=center border=1px bgcolor=white>
 				<tr align=center>
-					<th style=width:95px;></th>
-					<th style=width:140px;>월</th>
-					<th style=width:140px;>화</th>
-					<th style=width:140px;>수</th>
-					<th style=width:140px;>목</th>
-					<th style=width:140px;>금</th>
-					<th style=width:140px;>토</th>
+					<td style=width:95px;></td>
+					<td style=width:140px;>월</td>
+					<td style=width:140px;>화</td>
+					<td style=width:140px;>수</td>
+					<td style=width:140px;>목</td>
+					<td style=width:140px;>금</td>
+					<td style=width:140px;>토</td>
 				</tr>
 <?
 				for($i=0; $i<20; $i++){		//각 교시별 한 칸씩 출력하면서 해당되는 수업이 있으면 출력

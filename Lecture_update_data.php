@@ -6,7 +6,7 @@ function update_data($LPID, $LID, $TextBook, $HowToScore, $Goal, $Plan1, $Plan2,
 	$connect=mysql_connect('localhost', 'qwerty', '1234')or die("mySQL 서버 연결 Error!");
 	mysql_select_db($database, $connect);
 
-    $query = "update LecturePlan set Textbook='$TextBook', HowToScore='$HowToScore', Goal='$Goal', W1=$Plan1, W2=$Plan2, W3=$Plan3, W4=$Plan4, W5=$Plan5, W6=$Plan6, W7=$Plan7, W8=$Plan8, W9=$Plan9, W10=$Plan10, W11=$Plan11, W12=$Plan12, W13=$Plan13, W14=$Plan14, W15=$Plan15";
+    $query = "update LecturePlan set Textbook='$TextBook', HowToScore='$HowToScore', Goal='$Goal', W1='$Plan1', W2='$Plan2', W3='$Plan3', W4='$Plan4', W5='$Plan5', W6='$Plan6', W7='$Plan7', W8='$Plan8', W9='$Plan9', W10='$Plan10', W11='$Plan11', W12='$Plan12', W13='$Plan13', W14='$Plan14', W15='$Plan15'";
 
 	$result = mysql_query($query, $connect);
 	mysql_close($connect);

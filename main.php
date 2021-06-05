@@ -11,35 +11,34 @@
         $result = mysql_query($query, $con);
         if(!mysql_num_rows($result)) {
             $query = "select TID from term where StartDay=(select min(StartDay) from term where '$today' <= StartDay)";
-            $result = mysql_query($result);
+            $result = mysql_query($query, $con);
         }
-			$array = mysql_fetch_array($result);
-			$TID = $array[0];
+        $array = mysql_fetch_array($result);
+        $TID = $array[0];
 
-			if($_SESSION["userid"] === "교수"){		//로그인한 사람이 교수 또는 학생을 구분하여 SQL 쿼리문 작성
-				$ID = $_SESSION['userPID'];
-				$query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
-					from Lecture, RegisterLecture 
-					where Lecture.PID='$ID' and Lecture.LID = RegisterLecture.LID and RegisterLecture.TID='$TID'";
-			}
-			else if($_SESSION["userid"] === "학생") {
-				$ID = $_SESSION['userSID'];
-				$query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
-					from Lecture, Class, RegisterLecture where Class.SID='$ID' and Class.LID=Lecture.LID
-					and Class.LID=RegisterLecture.LID and RegisterLecture.TID='$TID'";		//학생 수강 과목 검색
-			}
-			$result = mysql_query($query, $con);
-			$num = mysql_num_rows($result);
-			$schedule = mysql_fetch_array($result);
+        if($_SESSION["userid"] === "교수"){		//로그인한 사람이 교수 또는 학생을 구분하여 SQL 쿼리문 작성
+            $ID = $_SESSION['userPID'];
+            $query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
+                from Lecture, RegisterLecture 
+                where Lecture.PID='$ID' and Lecture.LID = RegisterLecture.LID and RegisterLecture.TID='$TID'";
+        }
+        else if($_SESSION["userid"] === "학생") {
+            $ID = $_SESSION['userSID'];
+            $query = "select Lecture.LNAME, Lecture.DayOfWeek, Lecture.StartTime, Lecture.EndTime
+                from Lecture, Class, RegisterLecture where Class.SID='$ID' and Class.LID=Lecture.LID
+                and Class.LID=RegisterLecture.LID and RegisterLecture.TID='$TID'";		//학생 수강 과목 검색
+        }
+        $result = mysql_query($query, $con);
+        $num = mysql_num_rows($result);
+        $schedule = mysql_fetch_array($result);
 
-			$lecture;
-			for($i = 0; $i < $num; $i++) {
-				for($j = 0; $j < 4; $j++) {
-					$lecture[$i][$j] = $schedule[$j];
-				}
-				$schedule = mysql_fetch_array($result);
-			}
-		
+        $lecture;
+        for($i = 0; $i < $num; $i++) {
+            for($j = 0; $j < 4; $j++) {
+                $lecture[$i][$j] = $schedule[$j];
+            }
+            $schedule = mysql_fetch_array($result);
+        }
     }
 ?>
 

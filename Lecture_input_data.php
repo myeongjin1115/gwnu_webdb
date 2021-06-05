@@ -7,7 +7,7 @@ function insert_Data($LPID, $LID, $TextBook, $HowToScore, $Goal, $Plan1, $Plan2,
 	mysql_select_db($database, $connect);
 
 	$query1 = "update Lecture set LPID=$LPID where LID=$LID";
-	$query = "insert into LecturePlan values('$LPID', '$LID', '$TextBook', '$HowToScore', '$Goal', '$Plan1', '$Plan2', '$Plan3', '$Plan4', '$Plan5', '$Plan6', '$Plan7', '$Plan8', '$Plan9', '$Plan10', '$Plan11', '$Plan12', '$Plan13', '$Plan14', '$Plan15')";
+	$query = "insert into LecturePlan values('$LPID', '$LID', '$HowToScore', '$Goal', '$TextBook', '$Plan1', '$Plan2', '$Plan3', '$Plan4', '$Plan5', '$Plan6', '$Plan7', '$Plan8', '$Plan9', '$Plan10', '$Plan11', '$Plan12', '$Plan13', '$Plan14', '$Plan15')";
 
 	$result = mysql_query($query, $connect);
 	$result1 = mysql_query($query1, $connect);

@@ -38,13 +38,13 @@
 		echo "</tr>";
 		echo "<tr align=center>";
 			echo "<td>교재 : </td>";
-			echo "<td><INPUT type=text size=25 name=TextBook value=$plan[2] readonly></td>";
+			echo "<td><INPUT type=text size=25 name=TextBook value=$plan[4] readonly></td>";
 			echo "<td>성적 반영 방법 : </td>";
-			echo "<td><INPUT type=text size=25 name=HowToScore value=$plan[3] readonly></td>";
+			echo "<td><INPUT type=text size=25 name=HowToScore value=$plan[2] readonly></td>";
 		echo "</tr>";
 		echo "<tr align=center>";
 			echo "<td>수업목표 : </td>";
-			echo "<td colspan=3><INPUT type=text size=77 name=Goal value=$plan[4] readonly></td>";
+			echo "<td colspan=3><INPUT type=text size=77 name=Goal value=$plan[3] readonly></td>";
 		echo "</tr>";
 		echo "<tr align=center>";
 

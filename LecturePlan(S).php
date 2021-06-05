@@ -11,11 +11,9 @@
 	$ID = $_SESSION['userSID'];	
 
 	$query = "select * from class where SID=$ID";
-	$query1 = "select count(*) as cnt from class";
 
 	$result = mysql_query($query, $connect);
-	$result1 = mysql_query($query1, $connect);
-	$num=mysql_fetch_array($result1);
+	$num=mysql_num_rows($result);
 ?>
 
 <html>
@@ -41,14 +39,17 @@
         <font size="5">수업관리</font>
     </div>
 
+	<form action="LEcturePlan(S).php" method="post">	
     <!-- article subheader -->
     <div id="article_subhead">
-        <font size="5">강의계획서 조회</font>
+        <font size="5">강의계획서</font>
         <table align="right">
             <tr>
                 <td>
-                    <form action="LecturePlan(S).php" method="post">
-                        <input type="submit" name="" value="조회">
+                    <input type="submit" name="" value="조회">&nbsp;&nbsp;&nbsp;
+                </td>
+				<td>
+                    <input type="submit" formaction="checkLP.php" value="확인">
                 </td>
             </tr>
         </table>
@@ -64,7 +65,7 @@
 			<th width=100>수업 계획서 저장 여부</th>
 		</tr>
 <?
-	for($i=0; $i<$num[0]; $i++){
+	for($i=0; $i<$num; $i++){
 		$source=mysql_fetch_array($result);
 		$LID = $source[0];
 		$query2 = "select LID, LNAME, Classification, LPID from Lecture where LID=$LID";
@@ -78,9 +79,9 @@
 			else
 				echo "<td height=30 width=20>교양</td>";
 			if($Lecture[3])
-				echo "<td height=30 width=150> <INPUT type=submit formaction= checkLP.php value=O style=background-color:transparent;  border:0px transparent solid;></td>";
+				echo "<td height=30 width=150>O</td>";
 			else
-				echo "<td height=30 width=150> <INPUT type=button value=X style=background-color:transparent;  border:0px transparent solid; disable></td>";
+				echo "<td height=30 width=150>X</td>";
 			echo "<td height=30 width=150><INPUT type=radio name=select value=$Lecture[0]></td>";
 		echo "</tr>";
 	}
